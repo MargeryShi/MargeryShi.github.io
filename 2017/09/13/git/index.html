@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="git 基本操作初始化用户名12$ git config --global user.name &apos;xxx&apos;$ git config --global user.email &apos;xxx&apos; 初始化1$  git init 查看工作区状态1$ git status 添加工作区新文件到暂存区1234// 添加单个文件$ git add  readme.md//添加多个文件$ git add  . 提交文件到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于git 基本操作">
+<meta property="og:url" content="http://yoursite.com/2017/09/13/git/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="git 基本操作初始化用户名12$ git config --global user.name &apos;xxx&apos;$ git config --global user.email &apos;xxx&apos; 初始化1$  git init 查看工作区状态1$ git status 添加工作区新文件到暂存区1234// 添加单个文件$ git add  readme.md//添加多个文件$ git add  . 提交文件到">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-09-13T12:20:34.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于git 基本操作">
+<meta name="twitter:description" content="git 基本操作初始化用户名12$ git config --global user.name &apos;xxx&apos;$ git config --global user.email &apos;xxx&apos; 初始化1$  git init 查看工作区状态1$ git status 添加工作区新文件到暂存区1234// 添加单个文件$ git add  readme.md//添加多个文件$ git add  . 提交文件到">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/13/git/"/>
+
+
+
+
+
+  <title>关于git 基本操作 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/13/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Margery">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/my.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于git 基本操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-13T20:18:07+08:00">
+                2017-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h1><h2 id="初始化用户名"><a href="#初始化用户名" class="headerlink" title="初始化用户名"></a>初始化用户名</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git config --global user.name 'xxx'</div><div class="line"><span class="meta">$</span> git config --global user.email 'xxx'</div></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span>  git init</div></pre></td></tr></table></figure>
+<h2 id="查看工作区状态"><a href="#查看工作区状态" class="headerlink" title="查看工作区状态"></a>查看工作区状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git status</div></pre></td></tr></table></figure>
+<h2 id="添加工作区新文件到暂存区"><a href="#添加工作区新文件到暂存区" class="headerlink" title="添加工作区新文件到暂存区"></a>添加工作区新文件到暂存区</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 添加单个文件</div><div class="line"><span class="meta">$</span> git add  readme.md</div><div class="line">//添加多个文件</div><div class="line"><span class="meta">$</span> git add  .</div></pre></td></tr></table></figure>
+<h2 id="提交文件到git仓库"><a href="#提交文件到git仓库" class="headerlink" title="提交文件到git仓库"></a>提交文件到git仓库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 千万不要忘记写 提交的理由  -m</div><div class="line"><span class="meta">$</span>  git commit -m '第一次提交'</div><div class="line">//完了之后通过  git  status  查看提交的状态，是否完全提交</div><div class="line"><span class="meta">$</span> git status</div></pre></td></tr></table></figure>
+<h2 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git log</div></pre></td></tr></table></figure>
+<h2 id="回复记录"><a href="#回复记录" class="headerlink" title="回复记录"></a>回复记录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//回复到commit 3672db0f318b26e8bb06e5150298c7cea7176031</div><div class="line"><span class="meta">$</span> git reset --hard 3672db0</div></pre></td></tr></table></figure>
+<h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><h2 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// * 号所在分支为当前所在分支</div><div class="line"><span class="meta">$</span> git branch</div></pre></td></tr></table></figure>
+<h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git branch xxx</div></pre></td></tr></table></figure>
+<h2 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//切换到dev分支，前面有*</div><div class="line"><span class="meta">$</span> git checkout dev</div></pre></td></tr></table></figure>
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> git branch -d dev</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="以上命令的作用"><a href="#以上命令的作用" class="headerlink" title="以上命令的作用"></a>以上命令的作用</h1><blockquote>
+<p>一般自己开发项目的时候，也必须要搭建版本控制器。</p>
+</blockquote>
+<ul>
+<li>本地开发，代码在开发完毕之后，都应该归档。</li>
+<li>之前开发的内容要上线，而且在当前的内容下可能还会再做新的开发。</li>
+<li>怎么知道到底修改了那些代码?</li>
+</ul>
+<h1 id="创建本地共享仓库"><a href="#创建本地共享仓库" class="headerlink" title="创建本地共享仓库"></a>创建本地共享仓库</h1><ul>
+<li>仓库文件夹必须以.git结尾</li>
+<li><p>命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//   --bare 创建裸仓，没有工作区</div><div class="line"><span class="meta">$</span> git init --bare</div></pre></td></tr></table></figure>
+</li>
+<li><p>给共享仓库同步内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//  第一次同步内容</div><div class="line"><span class="meta">$</span>  git push xxx.git master</div></pre></td></tr></table></figure>
+</li>
+<li><p>同学1获取仓库内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//创建文件夹</div><div class="line"><span class="meta">$</span> mkdir stuPro1</div><div class="line">//克隆共享仓库的项目   [dirname] 克隆到哪了？如果不写，默认共享仓库的名字</div><div class="line"><span class="meta">$</span> cd  stuPro1</div><div class="line"><span class="meta">$</span> git clone xxx.git [dirname]</div></pre></td></tr></table></figure>
+</li>
+<li><p>同学1修改内容，并提交</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 修改内容</div><div class="line">// 添加内容到暂存区</div><div class="line"><span class="meta">$</span> git add  .</div><div class="line">// 提交内容到（本地仓库）</div><div class="line"><span class="meta">$</span> git commit -m '提交更新'</div><div class="line">// 提交到(远程共享)仓库</div><div class="line"><span class="meta">$</span> git push xxx.git master</div></pre></td></tr></table></figure>
+</li>
+<li><p>同学1休假了，n周之后回公司，参与开发</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 同步代码</div><div class="line"><span class="meta">$</span> git pull xxx.git master</div></pre></td></tr></table></figure>
+</li>
+<li><p>重复以上的动作</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Margery WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/12/my/" rel="next" title="关于基本框架封装的总结">
+                <i class="fa fa-chevron-left"></i> 关于基本框架封装的总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/my.jpg"
+              alt="Margery" />
+          
+            <p class="site-author-name" itemprop="name">Margery</p>
+            <p class="site-description motion-element" itemprop="description">Stay hungry. Stay foolish</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MargeryShi" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5333579060?c=spr_sinamkt_buy_hyww_weibo_p113&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>weibo</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-基本操作"><span class="nav-number">1.</span> <span class="nav-text">git 基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化用户名"><span class="nav-number">1.1.</span> <span class="nav-text">初始化用户名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看工作区状态"><span class="nav-number">1.3.</span> <span class="nav-text">查看工作区状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加工作区新文件到暂存区"><span class="nav-number">1.4.</span> <span class="nav-text">添加工作区新文件到暂存区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交文件到git仓库"><span class="nav-number">1.5.</span> <span class="nav-text">提交文件到git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看提交历史"><span class="nav-number">1.6.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回复记录"><span class="nav-number">1.7.</span> <span class="nav-text">回复记录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分支"><span class="nav-number">2.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建分支"><span class="nav-number">2.2.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支"><span class="nav-number">2.3.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除分支"><span class="nav-number">2.4.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以上命令的作用"><span class="nav-number">3.</span> <span class="nav-text">以上命令的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建本地共享仓库"><span class="nav-number">4.</span> <span class="nav-text">创建本地共享仓库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Margery</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
