@@ -349,201 +349,16 @@
       
         
           
-            <h1 id="关于封装框架总结"><a href="#关于封装框架总结" class="headerlink" title="关于封装框架总结"></a>关于封装框架总结</h1><h2 id="常见的框架"><a href="#常见的框架" class="headerlink" title="常见的框架"></a>常见的框架</h2><ul>
-<li>1、常见的框架<br>学习前端的都知道，前端有很多的丰富的框架。例如：通用框架：jQuery、bootstarp、zepto…;ui框架：bootstar、layerui、amazeui…MVC框架:angular.js、react.js、veu.js…我们不仅仅要知道怎么用，还需要知道为什么这样用。‘知其然，知其所以然’。</li>
-<li>2、以jQuery整体分析：<pre><code>`(function(global,factory){
-/*
-*
-*
-*/
-})(window,function(global,factory){
-  //工厂模式
-function jQuery(){
-return  new jQuery.fn.init(selector,context);
-}
-jQuery.fn = jQuery.prototype ={
-constructor: jQuery
-}
-//为什么jQuery在使用的时候 可以使用  $ 和jQuery
-//结合 jQuery构造函数代码，我们得知jQuery对外暴露的方法是init方法
-//所以 整个jQuery的函数入口是init()
-window.jQuery = window.$ = jQuery;
-})
-})`
-</code></pre></li>
-<li>3、jQuery封装内容<br>  <strong>事件对象、选择器对象、属性对象、样式、内容…</strong><h2 id="事件框架"><a href="#事件框架" class="headerlink" title="事件框架"></a>事件框架</h2><h3 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h3></li>
-<li>1、页面触发事件的三种方式<br>  行内执行<br>  行内调用<br>  根据id或类定义函数<br>  <em>行内事件冒泡机制</em><br>  无论是DOM标准还是IE,直接写在html里的监听处理函数是事件冒泡传递时调用的,由最里层一直往上传递</li>
-<li>2、事件冒泡和捕获的区别</li>
-<li>3、IE和标准浏览器的绑定事件<br>  标准: addeventListener<br>  IE:attachEvent</li>
-<li>4、对象形式封装绑定事件<br>  (a)  On跨浏览器封装<br>  Event.on(‘div1’,’click’,fn);<pre><code>`on:function(id,type,fn){
-  var ele = this.$id(id);
-  if(ele.addEventListener){
-    ele.addEventListener(type,fn,false)
-  }else{
-    ele.attchEvent(&apos;on&apos;+type,fn);
-  }
-}`
-</code></pre>  b)    单独事件封装<br>  Event.click();<pre><code>`click:function(id,fn){
-  this.on(id,&apos;click&apos;,fn);
-}`
-</code></pre>  Mouseover<br>  Mouseout<br>  Hover 模仿jquery<br>  c) 面向对象 绑定到xx域下<br>  d) 通过自定义extend方法实现</li>
-<li>4、event对象<br>  (1) IE和标准浏览器的区别<br>  兼容写法： <code>var e = e || window.event</code><br>  (2)框架中获取事件对象<br>  (3)获取目标元素<br>  IE: e.srcElement<br>  标准：e.target</li>
-<li>5、阻止默认行为<br>  <strong>兼容问题</strong><br>  标准：e.preventDefault();<br>  IE: window.event.returnValue = false;</li>
-<li>6、阻止冒泡<br><strong>兼容问题</strong><br>标准： event.stopPropagation();<br>IE： event.cancelBubble = true;</li>
-<li><p>7、事件委托<br>可以实现向未来元素绑定事件</p>
-<pre><code>`delegate:function(p,target,type,fn){
-  var targetEle = null;
-  this.on(p,type,function(e){
-    //目标元素
-    targetEle = $$.getTarget(e);
-    //给目标元素添加事件
-    targetEle[&apos;on&apos;+type] = function(e){
-      // 通过call动态改变当前目标元素为触发事件的对象
-        fn.call(this);
-        $$.preventBubble(e);
-    };
-  targetEle[type]();
-  })
-}
-});`
-</code></pre><h2 id="选择器的封装"><a href="#选择器的封装" class="headerlink" title="选择器的封装"></a>选择器的封装</h2><h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
-<li>id选择器<br><code>$id:function(id){
-return document.getElementById(id);
-}</code></li>
-<li><p>tag<br>`$tagName:function(tName,context){<br>//如果存在上下文对象 则使用上下文对象  如果不存在 则使用document对象</p>
-<p>var ctx = context?context:document;<br>return ctx.getElementsByTagName(tName);<br>},`<br><em>getElementsByTagName  结果是伪数组。<br>跟数组一样有length属性，而且能通过下标获取相应位置的值，但不具备数组常有的功能，比如push，sort等</em></p>
-</li>
-<li>class<pre><code>`$class:function(cname,context){
-var rs = [];
-var tagAll = this.$tagName(&apos;*&apos;,context);
-for(var i = 0 ; i &lt; tagAll.length ; i++){
-  var classStr = tagAll[i].getAttribute(&apos;class&apos;);
-  if(!classStr) continue;
-  var classArr = this.trim(classStr).split(&apos; &apos;);
-  for(var j = 0 ; j &lt; classArr.length ;j ++){
-    //如果遍历到的标签 存在cname的样式 则添加
-      if(classArr[j] === cname){
-    rs.push(tagAll[i]);
-    //  div div1 red green  r1 r2 r3 r4...
-    break;
-      }
-    }
-  }
-  return rs;
-},`
-</code></pre><h3 id="多组选择器"><a href="#多组选择器" class="headerlink" title="多组选择器"></a>多组选择器</h3></li>
-<li>简单的多组<br>例如：(‘.div1,.div2,#div3’)<h3 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h3></li>
-<li>简单的层次<br>例如：比如：(‘.div1  #div2  p’);<h3 id="多组-层次"><a href="#多组-层次" class="headerlink" title="多组+层次"></a>多组+层次</h3>例如：(‘.div1 #div2,div3 p #p1’)<h3 id="复杂选择器"><a href="#复杂选择器" class="headerlink" title="复杂选择器"></a>复杂选择器</h3>sizzle.js<br>jquery的实现<h3 id="h5选择器"><a href="#h5选择器" class="headerlink" title="h5选择器"></a>h5选择器</h3>Document.querySelector(‘’);<br>Document.querySelectorAll(‘’);<h3 id="css样式框架"><a href="#css样式框架" class="headerlink" title="css样式框架"></a>css样式框架</h3><pre><code>`css:function(selector,key,value){
-var dom = this.domAllStrict(selector);
-if(value){  //设值
-  for(var i = 0 ; i &lt; dom.length ; i++){
-    dom[i].style[key] = value;
-  }
-}else{  //如果是获取值 跟jq一样 只返回第一个
-  //dom[0].style.color ==&gt; 只能取行内样式
-  if(dom[0].currentStyle){
-    return dom[0].currentStyle[key];
-  }else{
-    return window.getComputedStyle(dom[0],null)[key];
-    }
-    }
-  }`
-</code></pre><h2 id="Bom-的封装"><a href="#Bom-的封装" class="headerlink" title="Bom 的封装"></a>Bom 的封装</h2></li>
-</ul>
-</li>
-<li>标签的宽高<ul>
-<li>元素的高度与宽度<br>Width+padding+border —&gt;offset<br>Width+padding —&gt;client<br>content —&gt;scroll</li>
-</ul>
-</li>
-<li>浏览器的宽高<ul>
-<li>可视区域宽高<ul>
-<li>document.body.clientHeight (document.documentElement )  (ie和firfox都能用)</li>
-<li>window.innerHeight  (firefox能用)</li>
-<li>推荐用innerHeight  (忽略滚动条的宽度)</li>
-<li>兼容写法： window.innerWidth||this.clientWidth</li>
-</ul>
-</li>
-<li>屏幕宽高<ul>
-<li>window.screen.height</li>
-</ul>
-</li>
-<li>文档宽高<ul>
-<li>document.body.scrollHeight</li>
-</ul>
-</li>
-<li>文档偏移量<ul>
-<li>var scrollTop = window.pageYOffset|| document.documentElement.scrollTop || document.body.scrollTop;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>event 对象<ul>
-<li>event<ul>
-<li>兼容获取  var event = e||window.event;</li>
-<li>pageX/pageY 光标相对于网页的坐标</li>
-<li>screenX/screenY  相对于屏幕的坐标</li>
-<li>clientX/clientY 相对于浏览器左上角的坐标</li>
-</ul>
-</li>
-<li>pageX/pageY<ul>
-<li>ie不兼容</li>
-<li>pageY = clientY + div.scrollTop<h2 id="属性封装"><a href="#属性封装" class="headerlink" title="属性封装"></a>属性封装</h2></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Attr</li>
-<li>addClass</li>
-<li>removeClass</li>
-<li>hasClass</li>
-</ul>
-<h2 id="内容的封装"><a href="#内容的封装" class="headerlink" title="内容的封装"></a>内容的封装</h2><ul>
-<li>html<pre><code>`html:function(selector,html){
-var dom = this.domAllStrict(selector);
-if(html){   //设值
-  for(var i = 0 ; i &lt; dom.length ;i++){
-    dom[i].innerHTML = html;
-  }
-}else{//取值
-  return dom[0].innerHTML;
-}
-}`
-</code></pre></li>
-<li>text  步骤同html<h2 id="ajax封装"><a href="#ajax封装" class="headerlink" title="ajax封装"></a>ajax封装</h2><pre><code>`  ajax:function(json,callBack){
-var xhr = new XMLHttpRequest();
-var method =json.method;//get还是post
-var url =json.url;
-var param = null;  //参数
-xhr.open(method,url);
-if(method.toLowerCase() === &apos;post&apos;){
-for(var i in json.param){
-    param += &apos;$&apos;+i+&apos;=&apos;+json.param[i];
-}
-param = param?param.substr(1):null;
-  }
-  xhr.send(param);
-  xhr.onreadystatechange = function(){
-// 404   目标没找到
-// 500    服务器代码错误
-// 200    返回成功
-// 3xx    中转 ， 重定向！
-if(xhr.readyState == 4 &amp;&amp; xhr.status == 200){
-    var data;
-    if(json.type.toLowerCase() === &apos;xml&apos;){
-        data = xhr.responseXML;
-    }else{
-        data = xhr.responseText;
-    }
-    if(callBack){
-      callBack(data);
-    }
-  }
-}
-},`
-</code></pre><h2 id="动画封装"><a href="#动画封装" class="headerlink" title="动画封装"></a>动画封装</h2></li>
-</ul>
-
-          
+          关于封装框架总结常见的框架
+1、常见的框架学习前端的都知道，前端有很多的丰富的框架。例如：通用框架：jQuery、bootstarp、zepto…;ui框架：bootstar、layerui、amazeui…MVC框架:angular.js、react.js、veu.js…我们不仅仅要知道怎么用，还
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/12/my/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -661,8 +476,15 @@ if(xhr.readyState == 4 &amp;&amp; xhr.status == 200){
       
         
           
-            <h2 id="This-is-a-rain-day"><a href="#This-is-a-rain-day" class="headerlink" title="This is a rain day!"></a>This is a rain day!</h2><h3 id="Can-you-help-me"><a href="#Can-you-help-me" class="headerlink" title="Can you help me?"></a>Can you help me?</h3><h3 id="Yes"><a href="#Yes" class="headerlink" title="Yes."></a>Yes.</h3><h3 id="Thank-you"><a href="#Thank-you" class="headerlink" title="Thank you!"></a>Thank you!</h3>
+          This is a rain day!Can you help me?Yes.Thank you!
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/09/Morning/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -780,17 +602,15 @@ if(xhr.readyState == 4 &amp;&amp; xhr.status == 200){
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/09/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
